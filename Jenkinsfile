@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Clones the code using the GitHub credentials
-                git branch: 'main', credentials: 'jenkins-github-credentials', url: 'https://github.com/Vijithmohanan/eks-devops-pipeline.git'
+                git branch: 'main', credentialsId: 'jenkins-github-credentials', url: 'https://github.com/Vijithmohanan/eks-devops-pipeline.git'
             }
         }
         
