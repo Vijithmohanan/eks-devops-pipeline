@@ -5,8 +5,8 @@ pipeline {
     environment {
         // These IDs must match the IDs you set in the Jenkins Credentials Manager
         PATH = "/opt/homebrew/bin:${env.PATH}"
-        AWS_ACCESS_KEY_ID = credentials('devops-project-key')
-        AWS_SECRET_ACCESS_KEY = credentials('devops-project-key')
+        AWS_ACCESS_KEY_ID = credentials('jenkins-aws-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-key')
         TERRAFORM_DIR = 'terraform'
         K8S_MANIFESTS = 'ansible/kubernetes'
         CLUSTER_NAME = 'devops-beginner-eks'
