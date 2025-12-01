@@ -4,6 +4,7 @@ pipeline {
     // Set environment variables for authentication and configuration
     environment {
         // These IDs must match the IDs you set in the Jenkins Credentials Manager
+        PATH = "/opt/homebrew/bin:${env.PATH}"
         AWS_ACCESS_KEY_ID = credentials('devops-project-key')
         AWS_SECRET_ACCESS_KEY = credentials('devops-project-key')
         TERRAFORM_DIR = 'terraform'
