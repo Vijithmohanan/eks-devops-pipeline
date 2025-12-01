@@ -34,18 +34,22 @@ pipeline {
         
         // 2. Configure Local Connection
         stage('Setup Kubeconfig & Verify Nodes') {
-            steps {
-                script {
-                    def clusterName = sh(returnStdout: true, script: "terraform output -raw cluster_name").trim()
+    steps {
+        script {
+            // Use command substitution to capture the cluster name into a variable
+            def clusterName = sh(
+                script: 'terraform output -raw cluster_name', 
+                returnStdout: true // Capture the output
+            ).trim() // Remove leading/trailing whitespace/newlines
 
-                    // Connect Jenkins agent to EKS
-                    sh "aws eks update-kubeconfig --name ${clusterName} --region ${env.AWS_REGION}"
-                    
-                    // Verification 2A: Ensure connection works
-                    sh "kubectl get nodes" 
-                }
-            }
+            // Use the captured variable in the AWS CLI command
+            sh "aws eks update-kubeconfig --name ${clusterName} --region us-east-1" // Add --region if necessary
+            
+            // Add verification step
+            sh "kubectl get nodes"
         }
+    }
+}
 
         // 3. Deploy Application
         stage('Deploy Application & Verify Rollout') {
