@@ -65,3 +65,11 @@ module "eks" {
     }
   }
 }
+
+# Inside your terraform/ directory configuration
+output "cluster_name" {
+  description = "The name of the EKS cluster"
+  # This assumes your EKS module output is named 'eks_cluster_id' or similar
+  value       = module.eks.cluster_id # Adjust 'cluster_id' to your actual output attribute
+}
+
